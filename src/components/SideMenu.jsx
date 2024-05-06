@@ -40,7 +40,7 @@ const SideMenu = () => {
         <div>
           <ul className="flex flex-col gap-4">
             <Link onClick={() => setOpen("")} to="/">
-              <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Home</li>
+              <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer font-[600]">Home</li>
             </Link>
             <Collapse in={open === 1} timeout="auto" unmountOnExit>
               <ul>
@@ -52,7 +52,7 @@ const SideMenu = () => {
                 </Link>
               </ul>
             </Collapse>
-            <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer" onClick={() => setOpen(open === 1 ? "" : 1)}>
+            <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer font-[600]" onClick={() => setOpen(open === 1 ? "" : 1)}>
               <span>Students</span>
               {open === 1 ? <ExpandLess /> : <ExpandMore />}
             </li>
@@ -66,7 +66,7 @@ const SideMenu = () => {
                 </Link>
               </ul>
             </Collapse>
-            <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer" onClick={() => setOpen(open === 2 ? "" : 2)}>
+            <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer font-[600]" onClick={() => setOpen(open === 2 ? "" : 2)}>
               <span>Doctors</span>
               {open === 2 ? <ExpandLess /> : <ExpandMore />}
             </li>
@@ -80,7 +80,7 @@ const SideMenu = () => {
                 </Link>
               </ul>
             </Collapse>
-            <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer" onClick={() => setOpen(open === 3 ? "" : 3)}>
+            <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer font-[600]" onClick={() => setOpen(open === 3 ? "" : 3)}>
               <span>Courses</span>
               {open === 3 ? <ExpandLess /> : <ExpandMore />}
             </li>

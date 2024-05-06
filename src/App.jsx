@@ -15,6 +15,8 @@ import SideMenu from "./components/SideMenu";
 import Profile from "./components/Profile";
 import UploadStudent from "./components/UploadStudent";
 import ChooseStudentsFiles from "./components/ChooseStudentsFiles";
+import EditStudent from "./components/EditStudent";
+import AddSingleStudent from "./components/AddSingleStudent";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("adminID"));
@@ -40,6 +42,8 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/upload-student" element={<UploadStudent />} />
             <Route path="/choose-students-file" element={<ChooseStudentsFiles />} />
+            <Route path="/edit-student" element={<EditStudent />} />
+            <Route path="/add-single-student" element={<AddSingleStudent />} />
           </Routes>
         </div>
       </Router>

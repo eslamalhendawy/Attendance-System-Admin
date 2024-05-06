@@ -13,7 +13,7 @@ const ChangeAvatar = () => {
   const adminID = localStorage.getItem("adminID");
 
   const handlePhotoChange = async () => {
-    if(newImage === null) {
+    if (newImage === null) {
       toast.error("Please select a photo to upload");
       return;
     }
@@ -37,7 +37,7 @@ const ChangeAvatar = () => {
       <div onClick={() => setOpen(true)} className="bg-white absolute right-0 bottom-[20px] text-xl text-accent hover:text-primary duration-200 size-[35px] rounded-full flex items-center justify-center cursor-pointer">
         <i className="fa-solid fa-pen"></i>
       </div>
-      <input className="hidden" type="file" ref={fileInput} onChange={(e) =>setNewImage(e.target.files[0])} />
+      <input className="hidden" type="file" ref={fileInput} onChange={(e) => setNewImage(e.target.files[0])} />
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className="w-screen h-screen flex items-center justify-center">
           <div className="bg-white p-6 sm:p-12 shadow shadow-white rounded-xl w-[300px] sm:w-[450px]">
@@ -47,10 +47,14 @@ const ChangeAvatar = () => {
             <h4 className="text-center mb-4 font-[400] text-3xl">Change Profile Photo</h4>
             <p className="text-center text-[#606060] mb-4">Choose New Photo</p>
             <div className="flex items-center justify-center mb-4">
-              <button onClick={() => fileInput.current.click()} className="text-white bg-primary hover:bg-accent duration-200 py-2 px-12 rounded-lg font-semibold text-lg">Choose</button>
+              <button onClick={() => fileInput.current.click()} className="text-white bg-primary hover:bg-accent duration-200 py-2 px-12 rounded-lg font-semibold text-lg">
+                Choose
+              </button>
             </div>
             <div className="flex items-center justify-center">
-              <button disabled={loading} onClick={handlePhotoChange} className={`text-white bg-primary hover:bg-accent duration-200 py-2 px-12 rounded-lg font-semibold text-lg ${loading && "bg-accent"}`}>{loading ? "Please Wait..." : "Update" }</button>
+              <button disabled={loading} onClick={handlePhotoChange} className={`text-white bg-primary hover:bg-accent duration-200 py-2 px-12 rounded-lg font-semibold text-lg ${loading && "bg-accent"}`}>
+                {loading ? "Please Wait..." : "Update"}
+              </button>
             </div>
           </div>
         </div>
