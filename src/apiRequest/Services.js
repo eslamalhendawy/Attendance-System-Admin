@@ -3,48 +3,68 @@ const baseURL = "https://smart-attendance-system-using-qr-code-1.onrender.com/ap
 
 export const postData = async (url, data, token) => {
   let response = [];
-  await axios.post(`${baseURL}/${url}`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then(res => {
+  await axios
+    .post(`${baseURL}/${url}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
       response = res.data;
     })
-    .catch(err => {
+    .catch((err) => {
       response = err;
     });
-    return response;
-}
+  return response;
+};
 
 export const getData = async (url, token) => {
   let response = [];
-  await axios.get(`${baseURL}/${url}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then(res => {
+  await axios
+    .get(`${baseURL}/${url}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
       response = res.data;
     })
-    .catch(err => {
+    .catch((err) => {
       response = err;
     });
-    return response;
-}
+  return response;
+};
 
 export const updateData = async (url, data, token) => {
   let response = [];
-  await axios.patch(`${baseURL}/${url}`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then(res => {
+  await axios
+    .patch(`${baseURL}/${url}`, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
       response = res.data;
     })
-    .catch(err => {
+    .catch((err) => {
       response = err;
     });
-    return response;
+  return response;
+};
+
+export const deleteData = async (url, token) => {
+  let response = [];
+  await axios
+    .delete(`${baseURL}/${url}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .then((res) => {
+      response = res.data;
+    })
+    .catch((err) => {
+      response = err;
+    });
+  return response;
 };

@@ -1,14 +1,23 @@
 import { useState } from "react";
+import { deleteData } from "../apiRequest/Services";
 import Modal from "@mui/material/Modal";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const DeleteStudentModal = () => {
+const DeleteStudentModal = ({student}) => {
   const [open, setOpen] = useState(false);
+  const adminID = localStorage.getItem("adminID");
 
   const handleDelete = async () => {
     toast.info("Deleting Student...");
+    let response = await deleteData(`students/${student._id}`, adminID);
+    if(response === ""){
+      window.location.reload();
+    }
+    else{
+      toast.error("Failed to delete student");
+    }
   }
 
   return (

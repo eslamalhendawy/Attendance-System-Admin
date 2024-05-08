@@ -4,15 +4,12 @@ import Modal from "@mui/material/Modal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UpdateStudentModal = () => {
+const UpdateStudentModal = ({student}) => {
   const [open, setOpen] = useState(false);
 
   const handleDelete = async () => {
     toast.info("Updating Student...");
   };
-
-  const courses = ["course1", "course2", "course3", "course4"];
-  const passedCourses = ["course1", "course2", "course3", "course4"];
 
   return (
     <>
@@ -28,26 +25,26 @@ const UpdateStudentModal = () => {
                 <label htmlFor="name" className="text-lg font-semibold">
                   Name
                 </label>
-                <input type="text" id="name" placeholder="Test Test" className="border-2 border-black p-1 outline-none" />
+                <input type="text" id="name" placeholder={student.name} className="border-2 border-black p-1 outline-none" />
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="name" className="text-lg font-semibold">
                   E-mail
                 </label>
-                <input type="text" id="name" placeholder="Test@Test.com" className="border-2 border-black p-1 outline-none" />
+                <input type="text" id="name" placeholder={student.email} className="border-2 border-black p-1 outline-none" />
               </div>
               <div className="flex flex-col gap-2">
                 <label htmlFor="name" className="text-lg font-semibold">
                   Level
                 </label>
-                <input type="text" id="name" placeholder="4" className="border-2 border-black p-1 outline-none" />
+                <input type="text" id="name" placeholder={student.level} className="border-2 border-black p-1 outline-none" />
               </div>
             </div>
             <h4 className="font-bold text-xl mb-8">Courses:</h4>
             <div className="flex flex-wrap gap-4 mb-8">
-              {courses.map((course, index) => (
+              {student.courses.map((course, index) => (
                 <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize" key={index}>
-                  {course}
+                  {course.courseName}
                 </div>
               ))}
               <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize">
@@ -56,9 +53,9 @@ const UpdateStudentModal = () => {
             </div>
             <h4 className="font-bold text-xl mb-8">Passed Courses:</h4>
             <div className="flex flex-wrap gap-4 mb-8">
-              {passedCourses.map((course, index) => (
+              {student.passedCourses.map((course, index) => (
                 <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize" key={index}>
-                  {course}
+                  {course.courseName}
                 </div>
               ))}
               <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize">
