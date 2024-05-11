@@ -17,6 +17,8 @@ import UploadStudent from "./components/UploadStudent";
 import ChooseStudentsFiles from "./components/ChooseStudentsFiles";
 import EditStudent from "./components/EditStudent";
 import AddSingleStudent from "./components/AddSingleStudent";
+import UploadDoctor from "./components/UploadDoctor";
+import EditDoctor from "./components/EditDoctor";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("adminID"));
@@ -44,6 +46,8 @@ function App() {
             <Route path="/choose-students-file" element={<ChooseStudentsFiles />} />
             <Route path="/edit-student" element={<EditStudent />} />
             <Route path="/add-single-student" element={<AddSingleStudent />} />
+            <Route path="/upload-doctor" element={<UploadDoctor />} />
+            <Route path="/edit-doctor" element={<EditDoctor />} />
           </Routes>
         </div>
       </Router>

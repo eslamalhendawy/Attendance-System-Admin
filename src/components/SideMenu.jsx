@@ -42,21 +42,11 @@ const SideMenu = () => {
             <Link onClick={() => setOpen("")} to="/">
               <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer font-[600]">Home</li>
             </Link>
-            <Collapse in={open === 1} timeout="auto" unmountOnExit>
-              <ul>
-                <Link to="/edit-student">
-                  <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Edit</li>
-                </Link>
-                <Link to="/upload-student">
-                  <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Upload Data</li>
-                </Link>
-              </ul>
-            </Collapse>
             <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer font-[600]" onClick={() => setOpen(open === 1 ? "" : 1)}>
               <span>Students</span>
               {open === 1 ? <ExpandLess /> : <ExpandMore />}
             </li>
-            <Collapse in={open === 2} timeout="auto" unmountOnExit>
+            <Collapse in={open === 1} timeout="auto" unmountOnExit>
               <ul>
                 <Link to="/edit-student">
                   <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Edit</li>
@@ -70,6 +60,20 @@ const SideMenu = () => {
               <span>Doctors</span>
               {open === 2 ? <ExpandLess /> : <ExpandMore />}
             </li>
+            <Collapse in={open === 2} timeout="auto" unmountOnExit>
+              <ul>
+                <Link to="/edit-doctor">
+                  <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Edit</li>
+                </Link>
+                <Link to="/upload-doctor">
+                  <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Upload Data</li>
+                </Link>
+              </ul>
+            </Collapse>
+            <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer font-[600]" onClick={() => setOpen(open === 3 ? "" : 3)}>
+              <span>Courses</span>
+              {open === 3 ? <ExpandLess /> : <ExpandMore />}
+            </li>
             <Collapse in={open === 3} timeout="auto" unmountOnExit>
               <ul>
                 <Link to="/edit-student">
@@ -80,10 +84,6 @@ const SideMenu = () => {
                 </Link>
               </ul>
             </Collapse>
-            <li className="flex items-center justify-between hover:bg-white duration-200 p-2 rounded-lg cursor-pointer font-[600]" onClick={() => setOpen(open === 3 ? "" : 3)}>
-              <span>Courses</span>
-              {open === 3 ? <ExpandLess /> : <ExpandMore />}
-            </li>
           </ul>
         </div>
         <button className="bg-white py-2 rounded-lg text-[#685BFF] hover:bg-[#685BFF] hover:text-white duration-200" onClick={handleLogout}>
