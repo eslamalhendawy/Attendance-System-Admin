@@ -9,6 +9,7 @@ import UpdateStudentModal from "./UpdateStudentModal";
 
 const EditStudent = () => {
   const [fetched, setFetched] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [studentData, setStudentData] = useState({});
   const adminID = localStorage.getItem("adminID");
@@ -25,13 +26,22 @@ const EditStudent = () => {
       return;
     }
     toast.info("Fetching Student Data...");
+    setLoading(true);
     let response = await postData("students/getStudentByEmail", { email }, adminID);
     if (response.status === "success") {
       toast.success("Student Data Fetched Successfully");
       setStudentData(response.data.student);
-      setFetched(!fetched);
+      setFetched(true);
+      setLoading(false);
     } else {
       toast.error("Make sure you entered correct email or try again later.");
+      setLoading(false);
+    }
+  };
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
 
@@ -43,11 +53,11 @@ const EditStudent = () => {
           <label htmlFor="email" className="font-[600] text-2xl">
             Student E-mail :
           </label>
-          <input id="email" onChange={(e) => setEmail(e.target.value)} type="text" className="py-1 px-2 outline-none" placeholder="loerm487@gmail.com" />
+          <input onKeyDown={(e) => handleEnter(e)} id="email" onChange={(e) => setEmail(e.target.value)} type="text" className="py-1 px-2 outline-none" />
         </div>
         <div className="flex justify-center">
-          <button onClick={handleSearch} className="bg-accent hover:bg-primary duration-300 text-white py-4 px-12 rounded-lg text-xl">
-            Get student data
+          <button disabled={loading} onClick={handleSearch} className={`bg-accent hover:bg-primary duration-300 text-white py-4 px-12 rounded-lg text-xl ${loading && "bg-primary"}`}>
+            {loading ? "Loading..." : "Get student data"}
           </button>
         </div>
       </div>
@@ -81,9 +91,10 @@ const EditStudent = () => {
                 {course}
               </div>
             ))}
+            {studentData.passedCourses.length === 0 && <p className="text-red-500 text-lg">No Passed Courses</p>}
           </div>
           <div className="flex items-center justify-end mr-12 gap-8">
-            <UpdateStudentModal student={studentData} />
+            <UpdateStudentModal setFetched={setFetched} student={studentData} />
             <DeleteStudentModal student={studentData} />
           </div>
         </>

@@ -53,7 +53,7 @@ const EditDoctor = () => {
           <label htmlFor="email" className="font-[600] text-2xl">
             Doctor E-mail :
           </label>
-          <input id="email" onChange={(e) => setEmail(e.target.value)} type="text" className="py-1 px-2 outline-none" placeholder="loerm487@gmail.com" />
+          <input id="email" onChange={(e) => setEmail(e.target.value)} type="text" className="py-1 px-2 outline-none"/>
         </div>
         <div className="flex justify-center">
           <button onClick={handleSearch} className="bg-accent hover:bg-primary duration-300 text-white py-4 px-12 rounded-lg text-xl">

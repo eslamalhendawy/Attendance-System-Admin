@@ -12,13 +12,6 @@ const options = [
   { value: "4", label: "4" },
 ];
 
-const tempCourses = [
-  { value: "course1", label: "course1" },
-  { value: "course2", label: "course2" },
-  { value: "course3", label: "course3" },
-  { value: "course4", label: "course4" },
-];
-
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -81,6 +74,10 @@ const AddSingleStudent = () => {
     let response = await postData("students", { name, email, level, courses }, adminID);
     if (response.status === "success") {
       toast.success("Student Data Saved Successfully");
+      setName("");
+      setEmail("");
+      setLevel("1");
+      setCourses([""]);
       setLoading(false);
     }
   };
@@ -93,13 +90,13 @@ const AddSingleStudent = () => {
           <label htmlFor="name" className="font-semibold text-lg">
             Name :
           </label>
-          <input onChange={(e) => setName(e.target.value)} className="p-2 rounded-lg outline-none" type="text" id="name" />
+          <input value={name} onChange={(e) => setName(e.target.value)} className="p-2 rounded-lg outline-none" type="text" id="name" />
         </div>
         <div className="flex flex-col gap-2 w-[30%]">
           <label htmlFor="email" className="font-semibold text-lg">
             E-mail :
           </label>
-          <input onChange={(e) => setEmail(e.target.value)} className="p-2 rounded-lg outline-none" type="text" id="email" />
+          <input value={email} onChange={(e) => setEmail(e.target.value)} className="p-2 rounded-lg outline-none" type="text" id="email" />
         </div>
         <div className="flex flex-col gap-2 w-[30%]">
           <label className="font-semibold text-lg">Level :</label>
