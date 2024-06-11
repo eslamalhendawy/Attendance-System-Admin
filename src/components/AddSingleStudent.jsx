@@ -103,7 +103,7 @@ const AddSingleStudent = () => {
           <Select onChange={(e) => setLevel(e.value)} styles={customStyles} options={options} placeholder="Select Student Level" />
         </div>
         <div className="flex flex-col gap-2 w-[30%] mb-[100px]">
-          <label className="font-semibold text-lg">Passed Course :</label>
+          <label className="font-semibold text-lg">Course :</label>
           <Select onChange={(e) => setCourses(e.map((course) => course.value))} isMulti styles={customStyles} options={coursesList} placeholder="Select Student Courses" />
         </div>
         <button disabled={loading} onClick={handleSubmit} className={`bg-accent hover:bg-primary duration-300 text-white py-2 px-16 rounded-xl text-xl ${loading && "bg-primary"}`}>

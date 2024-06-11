@@ -94,7 +94,7 @@ const EditStudent = () => {
             {studentData.passedCourses.length === 0 && <p className="text-red-500 text-lg">No Passed Courses</p>}
           </div>
           <div className="flex items-center justify-end mr-12 gap-8">
-            <UpdateStudentModal setFetched={setFetched} student={studentData} />
+            <UpdateStudentModal setFetched={setFetched} enteredEmail={email} />
             <DeleteStudentModal student={studentData} />
           </div>
         </>

@@ -10,8 +10,8 @@ const DeleteDoctorModal = ({doctor}) => {
   const adminID = localStorage.getItem("adminID");
 
   const handleDelete = async () => {
-    toast.info("Deleting Student...");
-    let response = await deleteData(`students/${doctor._id}`, adminID);
+    toast.info("Deleting Doctor...");
+    let response = await deleteData(`doctors/${doctor._id}`, adminID);
     if(response === ""){
       window.location.reload();
     }

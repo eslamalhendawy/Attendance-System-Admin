@@ -9,20 +9,11 @@ import UpdateDoctorModal from "./UpdateDoctorModal";
 
 const EditDoctor = () => {
   const [fetched, setFetched] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [doctorData, setDoctorData] = useState({});
   const adminID = localStorage.getItem("adminID");
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
-
-  const tempDoctor = {
-    name: "John Doe",
-    email: "test@test.com",
-    courses: [
-      { courseName: "course 1" },
-      { courseName: "course 2" },
-      { courseName: "course 3" },
-    ],
-  }
 
   const handleSearch = async () => {
     setFetched(false);
@@ -35,14 +26,17 @@ const EditDoctor = () => {
       return;
     }
     toast.info("Fetching Doctor Data...");
-    // let response = await postData("students/getStudentByEmail", { email }, adminID);
-    setFetched(!fetched);
-    // if (response.status === "success") {
-    //   toast.success("Student Data Fetched Successfully");
-    //   setDoctorData(response.data.student);
-    // } else {
-    //   toast.error("Make sure you entered correct email or try again later.");
-    // }
+    setLoading(true);
+    let response = await postData("doctors/getDoctorByEmail", { email }, adminID);
+    if (response.status === "success") {
+      toast.success("Student Data Fetched Successfully");
+      setFetched(true);
+      setLoading(false);
+      setDoctorData(response.data.doctor);
+    } else {
+      toast.error("Make sure you entered correct email or try again later.");
+      setLoading(false);
+    }
   }
 
   return (
@@ -56,7 +50,7 @@ const EditDoctor = () => {
           <input id="email" onChange={(e) => setEmail(e.target.value)} type="text" className="py-1 px-2 outline-none"/>
         </div>
         <div className="flex justify-center">
-          <button onClick={handleSearch} className="bg-accent hover:bg-primary duration-300 text-white py-4 px-12 rounded-lg text-xl">
+          <button disabled={loading} onClick={handleSearch} className={`bg-accent hover:bg-primary duration-300 text-white py-4 px-12 rounded-lg text-xl ${loading && "bg-primary"}`}>
             Get Doctor Data
           </button>
         </div>
@@ -66,24 +60,25 @@ const EditDoctor = () => {
           <div className="flex justify-center mb-12">
             <div className="">
               <p className="mb-3 font-bold text-lg">
-                Name: <span className="font-[500]">{tempDoctor.name}</span>
+                Name: <span className="font-[500]">{doctorData.name}</span>
               </p>
               <p className="mb-3 font-bold text-lg">
-                Email: <span className="font-[500]">{tempDoctor.email}</span>
+                Email: <span className="font-[500]">{doctorData.email}</span>
               </p>
             </div>
           </div>
           <h4 className="font-bold text-xl mb-8 w-[80%] mx-auto">Courses:</h4>
           <div className="flex gap-4 mb-8 w-[80%] mx-auto">
-            {tempDoctor.courses.map((course, index) => (
+            {doctorData.courses.map((course, index) => (
               <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize" key={index}>
                 {course.courseName}
               </div>
             ))}
+            {doctorData.courses.length === 0 && <p className="text-red-500 text-lg">No Courses Found</p>}
           </div>
           <div className="flex items-center justify-end mr-12 gap-8">
-            <UpdateDoctorModal doctor={tempDoctor} />
-            <DeleteDoctorModal doctor={tempDoctor} />
+            <UpdateDoctorModal setFetched={setFetched} doctorEmail={email} />
+            <DeleteDoctorModal doctor={doctorData} />
           </div>
         </>
       )}
