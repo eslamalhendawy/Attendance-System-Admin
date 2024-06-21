@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { postData, getData } from "../apiRequest/Services";
 import Select from "react-select";
 
@@ -33,10 +34,12 @@ const AddSingleStudent = () => {
   const [email, setEmail] = useState("");
   const [level, setLevel] = useState("");
   const [courses, setCourses] = useState([]);
+  const [passedCourses, setPassedCourses] = useState([]);
   const [coursesList, setCoursesList] = useState([]);
   const [loading, setLoading] = useState(false);
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
   const adminID = localStorage.getItem("adminID");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -65,15 +68,13 @@ const AddSingleStudent = () => {
       toast.error("Please Select Student Level");
       return;
     }
-    if (courses.length === 0) {
-      toast.error("Please Select Student Courses");
-      return;
-    }
     toast.info("Saving Student Data...");
     setLoading(true);
-    let response = await postData("students", { name, email, level, courses }, adminID);
+    let response = await postData("students", { name, email, level, courses, passedCourses }, adminID);
     if (response.status === "success") {
       toast.success("Student Data Saved Successfully");
+      localStorage.setItem("newStudent", JSON.stringify(response.data.student));
+      navigate("/new-student");
       setName("");
       setEmail("");
       setLevel("1");
@@ -102,9 +103,13 @@ const AddSingleStudent = () => {
           <label className="font-semibold text-lg">Level :</label>
           <Select onChange={(e) => setLevel(e.value)} styles={customStyles} options={options} placeholder="Select Student Level" />
         </div>
-        <div className="flex flex-col gap-2 w-[30%] mb-[100px]">
+        <div className="flex flex-col gap-2 w-[30%]">
           <label className="font-semibold text-lg">Course :</label>
           <Select onChange={(e) => setCourses(e.map((course) => course.value))} isMulti styles={customStyles} options={coursesList} placeholder="Select Student Courses" />
+        </div>
+        <div className="flex flex-col gap-2 w-[30%] mb-[100px]">
+          <label className="font-semibold text-lg">Passed Courses :</label>
+          <Select onChange={(e) => setPassedCourses(e.map((course) => course.value))} isMulti styles={customStyles} options={coursesList} placeholder="Select Passed Courses" />
         </div>
         <button disabled={loading} onClick={handleSubmit} className={`bg-accent hover:bg-primary duration-300 text-white py-2 px-16 rounded-xl text-xl ${loading && "bg-primary"}`}>
           {loading ? "Saving..." : "Save"}

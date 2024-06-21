@@ -14,6 +14,8 @@ const options = [
   { value: "4", label: "4" },
 ];
 
+
+
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -30,7 +32,7 @@ const customStyles = {
   }),
 };
 
-const UpdateStudentModal = ({ setFetched, enteredEmail }) => {
+const UpdateStudentModal = ({ setFetched, enteredEmail, setEnteredEmail }) => {
   const [id, setId] = useState("");
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
@@ -43,15 +45,19 @@ const UpdateStudentModal = ({ setFetched, enteredEmail }) => {
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("adminID");
 
+  const [defaultValue, setDefaultValue] = useState({ value: "1", label: "1" });
+
   useEffect(() => {
     const fetchStudent = async () => {
       setLoading(true);
       const response = await postData("students/getStudentByEmail", { email: enteredEmail }, token);
+      console.log(response);
       if (response.status === "success") {
         setId(response.data.student._id);
         setName(response.data.student.name);
         setEmail(response.data.student.email);
         setLevel(response.data.student.level);
+        setDefaultValue({ value: response.data.student.level, label: response.data.student.level });
         setPassedCourses(response.data.student.passedCourses);
         setCourses(response.data.student.courses);
         setLoading(false);
@@ -77,6 +83,7 @@ const UpdateStudentModal = ({ setFetched, enteredEmail }) => {
     const response = await updateData(`students/${id}`, data, token);
     if (response.status === "success") {
       toast.success("Student Updated Successfully");
+      setEnteredEmail("");
       setOpen(false);
       setFetched(false);
     } else {
@@ -84,7 +91,6 @@ const UpdateStudentModal = ({ setFetched, enteredEmail }) => {
     }
   };
 
-  const handleAdd = () => {};
 
   return (
     <>
@@ -114,7 +120,7 @@ const UpdateStudentModal = ({ setFetched, enteredEmail }) => {
                     <label htmlFor="name" className="text-lg font-semibold">
                       Level
                     </label>
-                    <Select onChange={(e) => setLevel(e.value)} styles={customStyles} options={options} placeholder="Select Student Level" />
+                    <Select defaultValue={defaultValue}  onChange={(e) => setLevel(e.value)} styles={customStyles} options={options} placeholder="Select Student Level" />
                   </div>
                 </div>
                 <h4 className="font-bold text-xl mb-4">Courses:</h4>

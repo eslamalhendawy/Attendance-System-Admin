@@ -5,7 +5,7 @@ import { Table } from "antd";
 const StudentsTable = ({ data }) => {
   return (
     <Table className="capitalize" dataSource={data} pagination={false}>
-      <Table.Column title="Index" dataIndex="index" key="index" />
+      <Table.Column title="Student ID" dataIndex="index" key="index" />
       <Table.Column title="Name" dataIndex="name" key="name" />
       <Table.Column title="Email" dataIndex="email" key="email" />
       <Table.Column title="Password" dataIndex="password" key="password" />

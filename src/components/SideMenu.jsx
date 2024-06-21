@@ -17,7 +17,7 @@ const SideMenu = () => {
   useEffect(() => {
     const getDoctorData = async () => {
       const response = await getData("admins/viewProfileForAdmin", adminID);
-      setUserData({ ...userData, name: response.data.admin.name, email: response.data.admin.email, role: "admin", avatar: response.data.admin.profilePicture });
+      setUserData({ ...userData, name: response.data.admin.name, email: response.data.admin.email, role: "admin", avatar: response.data.admin.profilePicture.secure_url });
       setLoading(false);
     };
     getDoctorData();

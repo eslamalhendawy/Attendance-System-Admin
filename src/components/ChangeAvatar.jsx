@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
-import { updateData } from "../apiRequest/Services";
+import { updateData, postData } from "../apiRequest/Services";
+import { useAppContext } from "../Context/AppContext";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +12,7 @@ const ChangeAvatar = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const adminID = localStorage.getItem("adminID");
+  const { userData } = useAppContext();
 
   const handlePhotoChange = async () => {
     if (newImage === null) {
@@ -19,8 +21,27 @@ const ChangeAvatar = () => {
     }
     toast.info("Updating profile photo, please wait...");
     const formData = new FormData();
-    formData.append("profilePicture", newImage);
+    formData.append("adminProfilePicture", newImage);
     setLoading(true);
+    if (userData.avatar) {
+      const response = await updateData("admins/updateProfilePicture", formData, adminID);
+      if(response.status === "success") {
+        toast.success(response.message);
+        setOpen(false);
+        window.location.reload();
+      } else {
+        toast.error("Error updating profile photo, please try again");
+      }
+    } else {
+      const response = await postData("admins/uploadProfilePicture", formData, adminID);
+      if(response.status === "success") {
+        toast.success(response.message);
+        setOpen(false);
+        window.location.reload();
+      } else {
+        toast.error("Error updating profile photo, please try again");
+      }
+    }
     // const response = await updateData("doctors/updateProfilePicture", formData, adminID);
     // console.log(response);
     // if(response.status === "success") {

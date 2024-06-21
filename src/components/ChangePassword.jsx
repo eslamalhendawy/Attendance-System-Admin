@@ -30,7 +30,6 @@ const ChangePassword = () => {
     toast.info("Changing password...");
     setLoading(true);
     const response = await postData("admins/changePasswordForAdmins", { currentPassword, newPassword, passwordConfirm }, adminID);
-    console.log(response);
     if (response.status === "success") {
       toast.success(response.message);
       localStorage.removeItem("doctorID");

@@ -6,7 +6,7 @@ import Modal from "@mui/material/Modal";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UpdateDoctorModal = ({ doctorEmail, setFetched }) => {
+const UpdateDoctorModal = ({ doctorEmail, setFetched, setEnteredEmail }) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -36,6 +36,7 @@ const UpdateDoctorModal = ({ doctorEmail, setFetched }) => {
     if (response.status === "success") {
       toast.success("Doctor Updated Successfully");
       setOpen(false);
+      setEnteredEmail("");
       setFetched(false);
     } else {
       toast.error("Failed to Update Student");
