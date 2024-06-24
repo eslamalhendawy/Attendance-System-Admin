@@ -77,7 +77,7 @@ const EditStudent = () => {
             </div>
           </div>
           <h4 className="font-bold text-xl mb-8 w-[80%] mx-auto">Courses:</h4>
-          <div className="flex gap-4 mb-8 w-[80%] mx-auto">
+          <div className="flex flex-wrap gap-4 mb-8 w-[80%] mx-auto">
             {studentData.courses.map((course, index) => (
               <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize" key={index}>
                 {course.courseName}

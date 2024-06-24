@@ -76,11 +76,14 @@ const SideMenu = () => {
             </li>
             <Collapse in={open === 3} timeout="auto" unmountOnExit>
               <ul>
-                <Link to="/edit-student">
+                <Link to="/edit-course">
                   <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Edit</li>
                 </Link>
-                <Link to="/upload-student">
+                <Link to="/upload-course-data">
                   <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Upload Data</li>
+                </Link>
+                <Link to="/course-enrollment">
+                  <li className="hover:bg-white duration-200 p-2 rounded-lg cursor-pointer">Course Enrollment</li>
                 </Link>
               </ul>
             </Collapse>
