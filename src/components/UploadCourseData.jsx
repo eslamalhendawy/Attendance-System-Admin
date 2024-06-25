@@ -6,12 +6,6 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const options = [
-  { value: "1", label: "1" },
-  { value: "2", label: "2" },
-  { value: "3", label: "3" },
-  { value: "4", label: "4" },
-];
 
 const customStyles = {
   control: (provided, state) => ({
@@ -38,6 +32,7 @@ const UploadCourseData = () => {
   const [prerequisites, setPrerequisites] = useState([]);
   const [loading, setLoading] = useState(false);
   const adminID = localStorage.getItem("adminID");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -85,13 +80,14 @@ const UploadCourseData = () => {
     }else{
       tempPrerequisites = prerequisites;
     }
-    console.log(courseName, courseCode, doctorId, tempPrerequisites);
     toast.info("Saving Data...");
     setLoading(true);
     const response = await postData("courses", { courseName, courseCode, doctorId, prerequisites: tempPrerequisites }, adminID);
     console.log(response);
     if(response.status === "success") {
       toast.success("Course Data Saved Successfully");
+      localStorage.setItem("newCourse", JSON.stringify(response.data.course));
+      navigate("/new-course-data");
       setCourseName("");
       setCourseCode("");
       setDoctorId("");
