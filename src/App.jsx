@@ -24,6 +24,8 @@ import NewlyAddedDoctor from "./components/NewlyAddedDoctor";
 import UploadCourseData from "./components/UploadCourseData";
 import NewCourseData from "./components/NewCourseData";
 import AddCourseLectures from "./components/AddCourseLectures";
+import GetCourse from "./components/GetCourse";
+import EditCourse from "./components/EditCourse";
 
 function App() {
   const loggedIn = Boolean(localStorage.getItem("adminID"));
@@ -58,6 +60,8 @@ function App() {
             <Route path="/upload-course-data" element={<UploadCourseData />} />
             <Route path="/new-course-data" element={<NewCourseData />} />
             <Route path="/upload-lectures" element={<AddCourseLectures />} />
+            <Route path="/get-course" element={<GetCourse />} />
+            <Route path="/edit-course" element={<EditCourse />} />
           </Routes>
         </div>
       </Router>
