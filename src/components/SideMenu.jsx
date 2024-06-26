@@ -31,7 +31,7 @@ const SideMenu = () => {
   };
 
   return (
-    <aside className="sideMenuHeight bg-primary sticky top-4 left-0 py-4 pl-4 px-8 rounded-lg flex flex-col gap-4 w-fit">
+    <aside className="sideMenuHeight overflow-scroll no-scrollbar bg-primary sticky top-4 left-0 py-4 pl-4 px-8 rounded-lg flex flex-col gap-4 w-fit">
       <Link to="/profile" className="flex items-center gap-2">
         <div>{userData.avatar ? <img src={userData.avatar} className="size-[50px] rounded-full" /> : <div className="size-[50px] bg-accent rounded-full" />}</div>
         <h4 className="font-bold capitalize">{loading ? "Loading" : userData.name}</h4>
