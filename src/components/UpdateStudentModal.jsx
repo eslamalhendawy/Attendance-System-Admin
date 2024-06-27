@@ -14,8 +14,6 @@ const options = [
   { value: "4", label: "4" },
 ];
 
-
-
 const customStyles = {
   control: (provided, state) => ({
     ...provided,
@@ -91,7 +89,6 @@ const UpdateStudentModal = ({ setFetched, enteredEmail, setEnteredEmail }) => {
     }
   };
 
-
   return (
     <>
       <button onClick={() => setOpen(true)} className="bg-accent hover:bg-primary duration-300 text-white py-4 w-[150px] rounded-lg text-xl capitalize">
@@ -120,7 +117,7 @@ const UpdateStudentModal = ({ setFetched, enteredEmail, setEnteredEmail }) => {
                     <label htmlFor="name" className="text-lg font-semibold">
                       Level
                     </label>
-                    <Select defaultValue={defaultValue}  onChange={(e) => setLevel(e.value)} styles={customStyles} options={options} placeholder="Select Student Level" />
+                    <Select defaultValue={defaultValue} onChange={(e) => setLevel(e.value)} styles={customStyles} options={options} placeholder="Select Student Level" />
                   </div>
                 </div>
                 <h4 className="font-bold text-xl mb-4">Courses:</h4>
@@ -130,9 +127,6 @@ const UpdateStudentModal = ({ setFetched, enteredEmail, setEnteredEmail }) => {
                       {course.courseName}
                     </div>
                   ))}
-                  {/* <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize">
-                <i className="fa-solid fa-plus"></i>
-              </div> */}
                 </div>
                 <h4 className="font-bold text-xl mb-4">Passed Courses:</h4>
                 <div className="flex flex-wrap gap-4 mb-6">
@@ -141,9 +135,7 @@ const UpdateStudentModal = ({ setFetched, enteredEmail, setEnteredEmail }) => {
                       {course}
                     </div>
                   ))}
-                  {add && (
-                    <input onChange={(e) => setNewPassedCourse(e.target.value)} className="border-2 border-black p-1 outline-none placeholder:text-black w-[215px]" type="text" placeholder="Enter New Passed Course" />
-                  )}
+                  {add && <input onChange={(e) => setNewPassedCourse(e.target.value)} className="border-2 border-black p-1 outline-none placeholder:text-black w-[215px]" type="text" placeholder="Enter New Passed Course" />}
                   <button onClick={() => setAdd(true)} className="text-white bg-[#575AA2] hover:bg-[#494c8f] duration-200 py-2 px-4 rounded-lg capitalize">
                     <i className="fa-solid fa-plus"></i>
                   </button>

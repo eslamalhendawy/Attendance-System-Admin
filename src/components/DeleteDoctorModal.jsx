@@ -16,7 +16,7 @@ const DeleteDoctorModal = ({doctor}) => {
       window.location.reload();
     }
     else{
-      toast.error("Failed to delete student");
+      toast.error("Failed to delete Doctor");
     }
   }
 

@@ -77,11 +77,6 @@ const AddCourseLectures = () => {
           Save
         </button>
       </div>
-      {/* <div className="w-[80%] xl:w-[40%] mx-auto flex justify-center">
-        <Link to="/upload-lectures" className="bg-accent hover:bg-primary duration-300 text-white py-4 px-12 rounded-lg text-xl w-[60%] text-center">
-          Add Course Lectures
-        </Link>
-      </div> */}
       {!hidden && (
         <Table className="capitalize" dataSource={lectures} pagination={false}>
           <Table.Column title="Title" dataIndex="title" key="title" />

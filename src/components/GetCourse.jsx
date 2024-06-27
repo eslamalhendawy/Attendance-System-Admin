@@ -16,9 +16,8 @@ const GetCourse = () => {
     }
     toast.info("Fetching course data...");
     const response = await postData("courses/getCourseByCourseCode", { courseCode: code }, localStorage.getItem("adminID"));
-    console.log(response);
     if (response.status === "success") {
-      localStorage.setItem("editCourse", JSON.stringify(response.data.course));
+      localStorage.setItem("courseCode", code);
       navigate("/edit-course");
       toast.success("Course data fetched successfully");
     }

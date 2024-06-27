@@ -68,17 +68,6 @@ const UpdateDoctorModal = ({ doctorEmail, setFetched, setEnteredEmail }) => {
                     <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} className="border-2 border-black p-1 outline-none" />
                   </div>
                 </div>
-                {/* <h4 className="font-bold text-xl mb-4">Courses:</h4> */}
-                {/* <div className="flex flex-wrap gap-4 mb-8">
-              {doctor.courses.map((course, index) => (
-                <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize" key={index}>
-                  {course.courseName}
-                </div>
-              ))}
-              <div className="text-white bg-[#575AA2] py-2 px-4 rounded-lg capitalize">
-                <i className="fa-solid fa-plus"></i>
-              </div>
-            </div> */}
                 <div className="flex items-center justify-end gap-4">
                   <button onClick={() => setOpen(false)} className="py-2 w-[100px] bg-accent hover:bg-primary duration-200 rounded-lg text-white">
                     Cancel
