@@ -27,7 +27,6 @@ const ChooseStudentsFiles = () => {
     const formData = new FormData();
     formData.append("studentsData", file);
     const response = await postData("admins/uploadStudentData", formData, token);
-    console.log(response);
     if (response.status === "success" && response.message === "Some student records were incomplete and not added to the database. Please review the following records and ensure all required fields are provided") {
       setStatus("incomplete");
       let temp1 = response.data.incompleteStudents.map((student) => {

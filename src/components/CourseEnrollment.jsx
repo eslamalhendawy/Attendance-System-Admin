@@ -15,7 +15,6 @@ const CourseEnrollment = () => {
     }
     toast.info("Enrolling student to course...");
     const response = await postData("admins/enroll", { courseCode: code, studentId: studentCode }, localStorage.getItem("adminID"));
-    console.log(response);
     if(response.status === "success") {
       toast.success("Student enrolled successfully");
       setCode("");

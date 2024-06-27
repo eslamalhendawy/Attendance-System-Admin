@@ -83,7 +83,6 @@ const UploadCourseData = () => {
     toast.info("Saving Data...");
     setLoading(true);
     const response = await postData("courses", { courseName, courseCode, doctorId, prerequisites: tempPrerequisites }, adminID);
-    console.log(response);
     if(response.status === "success") {
       toast.success("Course Data Saved Successfully");
       localStorage.setItem("newCourse", JSON.stringify(response.data));

@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Modal from "@mui/material/Modal";
 import { updateData, postData } from "../apiRequest/Services";
 import { useAppContext } from "../Context/AppContext";
@@ -42,15 +42,6 @@ const ChangeAvatar = () => {
         toast.error("Error updating profile photo, please try again");
       }
     }
-    // const response = await updateData("doctors/updateProfilePicture", formData, adminID);
-    // console.log(response);
-    // if(response.status === "success") {
-    //   toast.success(response.message);
-    //   setOpen(false);
-    //   window.location.reload();
-    // } else {
-    //   toast.error("Error updating profile photo, please try again");
-    // }
   };
 
   return (

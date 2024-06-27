@@ -49,7 +49,6 @@ const UpdateStudentModal = ({ setFetched, enteredEmail, setEnteredEmail }) => {
     const fetchStudent = async () => {
       setLoading(true);
       const response = await postData("students/getStudentByEmail", { email: enteredEmail }, token);
-      console.log(response);
       if (response.status === "success") {
         setId(response.data.student._id);
         setName(response.data.student.name);

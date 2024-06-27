@@ -11,10 +11,6 @@ const AddLectureModal = ({ course }) => {
   const [title, setTitle] = useState("");
   const [lectureNumber, setLectureNumber] = useState("");
 
-  useEffect(() => {
-    console.log(course);
-  }, []);
-
   const handleUpdate = async () => {
     if (title === "" || lectureNumber === "") {
       toast.error("Please fill all the fields");
@@ -22,7 +18,6 @@ const AddLectureModal = ({ course }) => {
     }
     toast.info("Adding Lecture...");
     const response = await postData(`courses/addSingleLecture/${course.id}`, { title, lectureNumber }, localStorage.getItem("adminID"));
-    console.log(response);
     if (response.status === "success") {
       toast.success("Lecture Added Successfully");
       setOpen(false);

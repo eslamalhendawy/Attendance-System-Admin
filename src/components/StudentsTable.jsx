@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { Table } from "antd";
 
 const StudentsTable = ({ data }) => {

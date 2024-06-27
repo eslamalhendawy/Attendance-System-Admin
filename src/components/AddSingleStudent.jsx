@@ -45,7 +45,6 @@ const AddSingleStudent = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       let response = await getData("courses", adminID);
-      console.log(response);
       if (response.status === "success") {
         setCoursesList((prevCoursesList) => [...prevCoursesList, ...response.data.courses.map((course) => ({ value: course.id, label: course.courseName }))]);
       }
@@ -56,7 +55,6 @@ const AddSingleStudent = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       let response = await getData("courses", adminID);
-      console.log(response);
       if (response.status === "success") {
         setPassedCoursesList((prevCoursesList) => [...prevCoursesList, ...response.data.courses.map((course) => ({ value: course.courseCode, label: course.courseName }))]);
       }
@@ -96,7 +94,6 @@ const AddSingleStudent = () => {
     toast.info("Saving Student Data...");
     setLoading(true);
     let response = await postData("students", { name, email, level, courses: tempPrerequisites2, passedCourses: tempPrerequisites }, adminID);
-    console.log(response);
     if (response.status === "success") {
       toast.success("Student Data Saved Successfully");
       localStorage.setItem("newStudent", JSON.stringify(response.data.student));

@@ -18,7 +18,6 @@ const EditLectureModal = ({ record }) => {
     }
     toast.info("Updating Lecture...");
     const response = await updateData(`courses/updateCourseLectures/${record.id}`, { title, lectureNumber }, localStorage.getItem("adminID"));
-    console.log(response);
     if (response.status === "success") {
       toast.success("Lecture Updated Successfully");
       setOpen(false);
