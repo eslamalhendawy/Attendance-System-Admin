@@ -35,7 +35,8 @@ const AddSingleStudent = () => {
   const [level, setLevel] = useState("");
   const [courses, setCourses] = useState([]);
   const [passedCourses, setPassedCourses] = useState([]);
-  const [coursesList, setCoursesList] = useState([]);
+  const [coursesList, setCoursesList] = useState([{ value: "none", label: "No Courses" }]);
+  const [passedCoursesList, setPassedCoursesList] = useState([{ value: "none", label: "No Courses" }]);
   const [loading, setLoading] = useState(false);
   const regEmail = /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/;
   const adminID = localStorage.getItem("adminID");
@@ -44,14 +45,28 @@ const AddSingleStudent = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       let response = await getData("courses", adminID);
+      console.log(response);
       if (response.status === "success") {
-        setCoursesList(response.data.courses.map((course) => ({ value: course._id, label: course.courseName })));
+        setCoursesList((prevCoursesList) => [...prevCoursesList, ...response.data.courses.map((course) => ({ value: course.id, label: course.courseName }))]);
+      }
+    };
+    fetchCourses();
+  }, []);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      let response = await getData("courses", adminID);
+      console.log(response);
+      if (response.status === "success") {
+        setPassedCoursesList((prevCoursesList) => [...prevCoursesList, ...response.data.courses.map((course) => ({ value: course.courseCode, label: course.courseName }))]);
       }
     };
     fetchCourses();
   }, []);
 
   const handleSubmit = async () => {
+    let tempPrerequisites = [];
+    let tempPrerequisites2 = [];
     if (name === "") {
       toast.error("Please Enter Student Name");
       return;
@@ -68,9 +83,20 @@ const AddSingleStudent = () => {
       toast.error("Please Select Student Level");
       return;
     }
+    if (passedCourses.includes("none")) {
+      tempPrerequisites = [];
+    } else {
+      tempPrerequisites = passedCourses;
+    }
+    if(courses.includes("none")){
+      tempPrerequisites2 = [];
+    }else{
+      tempPrerequisites2 = courses;
+    }
     toast.info("Saving Student Data...");
     setLoading(true);
-    let response = await postData("students", { name, email, level, courses, passedCourses }, adminID);
+    let response = await postData("students", { name, email, level, courses: tempPrerequisites2, passedCourses: tempPrerequisites }, adminID);
+    console.log(response);
     if (response.status === "success") {
       toast.success("Student Data Saved Successfully");
       localStorage.setItem("newStudent", JSON.stringify(response.data.student));
@@ -79,6 +105,9 @@ const AddSingleStudent = () => {
       setEmail("");
       setLevel("1");
       setCourses([""]);
+      setLoading(false);
+    }else{
+      toast.error("Something Went Wrong");
       setLoading(false);
     }
   };
@@ -109,7 +138,7 @@ const AddSingleStudent = () => {
         </div>
         <div className="flex flex-col gap-2 w-[30%] mb-[100px]">
           <label className="font-semibold text-lg">Passed Courses :</label>
-          <Select onChange={(e) => setPassedCourses(e.map((course) => course.value))} isMulti styles={customStyles} options={coursesList} placeholder="Select Passed Courses" />
+          <Select onChange={(e) => setPassedCourses(e.map((course) => course.value))} isMulti styles={customStyles} options={passedCoursesList} placeholder="Select Passed Courses" />
         </div>
         <button disabled={loading} onClick={handleSubmit} className={`bg-accent hover:bg-primary duration-300 text-white py-2 px-16 rounded-xl text-xl ${loading && "bg-primary"}`}>
           {loading ? "Saving..." : "Save"}

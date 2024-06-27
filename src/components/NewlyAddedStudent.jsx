@@ -6,11 +6,11 @@ const NewlyAddedStudent = () => {
     <section className="grow">
       <h1 className="font-semibold text-2xl text-center mb-12">Student Data</h1>
       <p className="xl:w-[40%] mx-auto font-medium text-xl mb-6">Student Name: {newStudent.name}</p>
-      <p className="xl:w-[40%] mx-auto font-medium text-xl mb-6">Student ID: {newStudent._id}</p>
+      <p className="xl:w-[40%] mx-auto font-medium text-xl mb-6">Student ID: {newStudent.studentId}</p>
       <p className="xl:w-[40%] mx-auto font-medium text-xl mb-6">Student Email: {newStudent.email}</p>
       <p className="xl:w-[40%] mx-auto font-medium text-xl mb-6">Student Password: {newStudent.password}</p>
       <h4 className="xl:w-[40%] mx-auto font-medium text-xl mb-6">Current Courses: </h4>
-      <div className="xl:w-[40%] mx-auto mb-6">
+      <div className="xl:w-[40%] flex flex-wrap gap-4 mx-auto mb-6">
         {newStudent.courses.length === 0 ? (
           <p>No Courses Found</p>
         ) : (
@@ -22,7 +22,7 @@ const NewlyAddedStudent = () => {
         )}
       </div>
       <h4 className="xl:w-[40%] mx-auto font-medium text-xl mb-2">Passed Courses: </h4>
-      <div className="xl:w-[40%] mx-auto mb-6">
+      <div className="xl:w-[40%] flex flex-wrap gap-4 mx-auto mb-6">
         {newStudent.passedCourses.length === 0 ? (
           <p>No Courses Found</p>
         ) : (

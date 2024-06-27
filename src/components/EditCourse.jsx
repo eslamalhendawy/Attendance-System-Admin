@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import EditCourseModal from "./EditCourseModal";
 import DeleteCourseModal from "./DeleteCourseModal";
-import { getData, postData, deleteData } from "../apiRequest/Services";
+import { postData, deleteData } from "../apiRequest/Services";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { Table } from "antd";
 
 import EditLectureModal from "./EditLectureModal";
+import AddLectureModal from "./AddLectureModal";
 
 const EditCourse = () => {
   const [lectures, setLectures] = useState([]);
@@ -40,15 +41,12 @@ const EditCourse = () => {
   const deleteLecture = async (record) => {
     toast.info("Deleting lecture...");
     const response = await deleteData(`courses/deleteCourseLectures/${record.id}`, localStorage.getItem("adminID"));
-    if(response === ""){
+    if (response === "") {
       window.location.reload();
-    }
-    else{
+    } else {
       toast.error("Failed to delete student");
     }
   };
-
-  const editLecture = async (record) => {};
 
   return (
     <section className="grow">
@@ -73,17 +71,14 @@ const EditCourse = () => {
             <DeleteCourseModal course={course} />
             <EditCourseModal course={course} />
           </div>
+          {/* <div className="mb-8 flex justify-center">
+            <button className="bg-accent hover:bg-primary duration-300 text-white py-3 px-12 rounded-lg text-xl text-center">Add Lecture</button>
+          </div> */}
+          <AddLectureModal course={course} />
           <Table className="capitalize" dataSource={lectures} pagination={false}>
             <Table.Column title="Title" dataIndex="title" key="title" />
             <Table.Column title="Lecture Number" dataIndex="lectureNumber" key="lectureNumber" />
-            <Table.Column
-              title="Edit"
-              dataIndex="action"
-              key="action"
-              render={(_, record) => (
-                <EditLectureModal record={record} />
-              )}
-            />
+            <Table.Column title="Edit" dataIndex="action" key="action" render={(_, record) => <EditLectureModal record={record} />} />
             <Table.Column
               title="Delete"
               dataIndex="action"

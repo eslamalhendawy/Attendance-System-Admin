@@ -13,7 +13,7 @@ const customStyles = {
     ...provided,
     border: "2px solid black",
     width: "250px",
-    padding: "4px",
+    padding: "0px",
     boxShadow: state.isFocused ? "0 0 0 2px #2868c7" : null,
     outline: "none",
   }),
@@ -83,8 +83,8 @@ const EditCourseModal = ({ course }) => {
       <Modal open={open} onClose={() => setOpen(false)}>
         <div className="w-screen h-screen flex items-center justify-center">
           <div className="bg-white p-6 w-[300px] sm:w-[550px]">
-            <h1 className="text-2xl text-center underline font-semibold mb-8">Edit Course Data</h1>
-            <div className="flex flex-col items-center gap-4 mb-8">
+            <h1 className="text-2xl text-center underline font-semibold mb-6">Edit Course Data</h1>
+            <div className="flex flex-col items-center gap-2 mb-8">
               <div className="flex flex-col gap-2 w-[250px]">
                 <label htmlFor="name" className="text-lg font-semibold">
                   Course Name
@@ -103,7 +103,7 @@ const EditCourseModal = ({ course }) => {
                 </label>
                 <Select onChange={(e) => setDoctor(e.value)} styles={customStyles} options={doctorsList} placeholder="" />
               </div>
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col gap-2 mb-4">
                 <label htmlFor="name" className="text-lg font-semibold">
                   Prerequisites
                 </label>

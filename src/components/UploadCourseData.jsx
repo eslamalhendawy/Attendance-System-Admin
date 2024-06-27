@@ -86,7 +86,7 @@ const UploadCourseData = () => {
     console.log(response);
     if(response.status === "success") {
       toast.success("Course Data Saved Successfully");
-      localStorage.setItem("newCourse", JSON.stringify(response.data.course));
+      localStorage.setItem("newCourse", JSON.stringify(response.data));
       navigate("/new-course-data");
       setCourseName("");
       setCourseCode("");
