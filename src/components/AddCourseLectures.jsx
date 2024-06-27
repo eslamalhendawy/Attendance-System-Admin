@@ -24,7 +24,7 @@ const AddCourseLectures = () => {
       return;
     }
     toast.info("Adding lecture...");
-    const response = await postData(`courses/addSingleLecture/${newCourse._id}`, { title, lectureNumber }, localStorage.getItem("adminID"));
+    const response = await postData(`courses/addSingleLecture/${newCourse.course._id}`, { title, lectureNumber }, localStorage.getItem("adminID"));
     if (response.status === "success") {
       toast.success("Lecture added successfully");
       const temp = { title: response.data.lecture.title, lectureNumber: response.data.lecture.lectureNumber };
@@ -39,7 +39,7 @@ const AddCourseLectures = () => {
 
   useEffect(() => {
     const fetchLectures = async () => {
-      const response = await getData(`courses/${newCourse.id}`, localStorage.getItem("adminID"));
+      const response = await getData(`courses/${newCourse.course.id}`, localStorage.getItem("adminID"));
       if (response.status === "success") {
         const temp = response.data.course.lectures.map((lecture) => {
           return { title: lecture.title, lectureNumber: lecture.lectureNumber };
@@ -54,7 +54,7 @@ const AddCourseLectures = () => {
     <section className="grow">
       <h1 className="font-semibold text-2xl text-center mb-12">Upload Data For Courses</h1>
       <p className="w-[80%] xl:w-[40%] mx-auto font-medium text-xl mb-6 text-[#B31111] text-center">--&gt;The course must have 12 lecture for the year&lt;--</p>
-      <p className="w-[80%] xl:w-[40%] mx-auto font-medium text-xl mb-6">Course Name: {newCourse.courseName}</p>
+      <p className="w-[80%] xl:w-[40%] mx-auto font-medium text-xl mb-6">Course Name: {newCourse.course.courseName}</p>
       <div className="flex flex-col items-center gap-8 mb-24">
         <div className="flex flex-col gap-2 w-[80%] xl:w-[40%]">
           <label htmlFor="title" className="font-semibold text-lg">
