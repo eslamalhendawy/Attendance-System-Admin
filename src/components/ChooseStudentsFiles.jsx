@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { postData } from "../apiRequest/Services";
+import { Table } from "antd";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,10 +28,11 @@ const ChooseStudentsFiles = () => {
     const formData = new FormData();
     formData.append("studentsData", file);
     const response = await postData("admins/uploadStudentData", formData, token);
+    console.log(response);
     if (response.status === "success" && response.message === "Some student records were incomplete and not added to the database. Please review the following records and ensure all required fields are provided") {
       setStatus("incomplete");
       let temp1 = response.data.incompleteStudents.map((student) => {
-        return { index: student.studentId, name: student.name, email: student.email, level: student.level, passedCourses: student.passedCourses, password: student.password };
+        return { index: student.studentIndex, name: student.name, email: student.email, level: student.level, passedCourses: student.passedCourses, password: student.password };
       });
       let temp2 = response.data.completeStudents.map((student) => {
         return { index: student.studentId, name: student.name, email: student.email, level: student.level, passedCourses: student.passedCourses, password: student.password };
@@ -104,7 +106,30 @@ const ChooseStudentsFiles = () => {
               </button>
             </div>
             <h3 className="text-center font-medium text-[#0D181B] text-xl mb-12">Students Rejected</h3>
-            <StudentsTable data={incomplete} />
+            {/* <StudentsTable data={incomplete} /> */}
+            <Table className="capitalize" dataSource={incomplete} pagination={false}>
+              <Table.Column title="Index" dataIndex="index" key="index" />
+              <Table.Column title="Name" dataIndex="name" key="name" />
+              <Table.Column title="Email" dataIndex="email" key="email" />
+              <Table.Column title="Password" dataIndex="password" key="password" />
+              <Table.Column title="Level" dataIndex="level" key="level" />
+              <Table.Column
+                title="Passed Courses"
+                dataIndex="passedCourses"
+                key="passedCourses"
+                render={(_, record) => (
+                  <div>
+                    {record.passedCourses.map((course, index) => {
+                      return (
+                        <span key={index} className="mr-1">
+                          {course},
+                        </span>
+                      );
+                    })}
+                  </div>
+                )}
+              />
+            </Table>
           </>
         )}
         {status === "incomplete" && selected === "accepted" && (
